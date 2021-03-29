@@ -83,6 +83,21 @@ const Contents = () => {
 
             // arr 가 만들어지면 추가
             // obj 형태로 업데이트
+
+            // 누적 확진자 추이
+            setConfirmedData({
+                labels,
+                // fill : 그래프의 색상을 채우는지
+                // label - data match
+                datasets : [
+                    {
+                        label: "국내 누적 확진자",
+                        backgroundColor: "salmon",
+                        fill: true,
+                        data: arr.map(a => a.confirmed)
+                    },
+                ]
+            });
         }
         fetchEvents()
     }, [])
@@ -92,6 +107,16 @@ const Contents = () => {
         <section>
             <h2>국내 코로나 현황</h2>
             <div className="contents"> {/* 리액트에서는 클래스를 줄 때 className 을 작성 */}
+                {/* 누적 확진자 추이 */}
+                <div className="wrap">
+                    {/* object 형태 */}
+                    {/* chartjs 옵션 : https://www.chartjs.org/ */}
+                    {/* chartjs REACT 사용법 : https://github.com/reactchartjs/react-chartjs-2 */}
+                    <Bar data={confirmedData} options={
+                        {title: {display: true, text: "누적 확진자 추이", fontSize: 16}},
+                        {legend: {display:  true, position: "bottom"}}
+                    } />
+                </div>
             </div>
         </section>
     )
