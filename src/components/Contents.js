@@ -98,6 +98,19 @@ const Contents = () => {
                     },
                 ]
             });
+
+            // 월별 격리자 현황
+            setQuarantinedData({
+                labels,
+                datasets : [
+                    {
+                        label: "월별 격리자 현황",
+                        borderColor: "salmon",
+                        fill: false,
+                        data: arr.map(a => a.active)
+                    },
+                ]
+            });
         }
         fetchEvents()
     }, [])
@@ -114,6 +127,15 @@ const Contents = () => {
                     {/* chartjs REACT 사용법 : https://github.com/reactchartjs/react-chartjs-2 */}
                     <Bar data={confirmedData} options={
                         {title: {display: true, text: "누적 확진자 추이", fontSize: 16}},
+                        {legend: {display:  true, position: "bottom"}}
+                    } />
+                </div>
+
+                {/* 월별 격리자 현황 */}
+                <div className="wrap">
+                    {/* object 형태 */}
+                    <Line data={quarantinedData} options={
+                        {title: {display: true, text: "월별 격리자 현황", fontSize: 16}},
                         {legend: {display:  true, position: "bottom"}}
                     } />
                 </div>
